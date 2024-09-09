@@ -14,7 +14,8 @@ export default SignInPage
 
 const SignInBody = styled.div`
   width: 350px;
-  height: 330px;
+  /* height: 330px; */
+  height: fit-content;
 
   padding: 20px;
 

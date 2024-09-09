@@ -1,12 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from '@emotion/styled'
+import MainContent from '../components/MainContent'
+import { useNavigate } from 'react-router-dom'
 
 const MainPage = () => {
+  const navigate = useNavigate();
   return (
     <MainBody>
-        <h3>
-          Dev MBTI
-        </h3>
+      <button onClick={(e) => {
+        e.preventDefault();
+        navigate('/results')
+      }}>결과목록으로</button>
+      <MainContent/>
     </MainBody>
   )
 }
@@ -23,3 +28,4 @@ const MainBody = styled.div`
 
   margin: 0 auto;
 `
+

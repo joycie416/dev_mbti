@@ -1,7 +1,8 @@
 import React, { useRef, useState } from 'react'
 import styled from '@emotion/styled'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { login } from '../axios/auth'
+import useUserStore from '../zustand/bearStore'
 
 const inputObj = [
   {
@@ -18,18 +19,12 @@ const SignInForm = () => {
   const inputs = { id: useRef(''), password: useRef('') };
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
+  const {signIn} = useUserStore(state => state);
 
   const Input = ({ name, type }) => {
-    console.log(inputs);
+    // console.log(inputs);
     return (
       <StInput id={name} type={type} placeholder={name} key={name}
-        style={{
-          width: '100%',
-          height: 35,
-          padding: 5,
-          imeMode: name === 'id' ? 'disabled' : 'auto'
-          // marginBottom:20
-        }}
         onChange={(e) => {
           inputs[name].current = e.target.value;
         }} />
@@ -40,26 +35,29 @@ const SignInForm = () => {
     <Form>
       <H3>로그인</H3>
       {inputObj.map(obj => Input(obj))}
-      <p>{message}</p>
+      {message ? <p className='warning'>{message}</p> : null}
+      <p className='notice'>계정이 없으신가요? <span><Link to='/signup'>회원가입</Link></span></p>
       <Button onClick={async (e) => {
         e.preventDefault();
-        try {
-          const { message: msg, success } = await login({ id: inputs.id.current, password: inputs.password.current, nickname: inputs.nickname.current });
+        // try {
+          const { data } = await login({ id: inputs.id.current, password: inputs.password.current });
 
           // setMessage(msg);
-          if (success) {
+          if (data.success) {
             // alert(`로그인에 성공했습니다.`);
-            navigate('/mypage')
+            signIn(data);
+            localStorage.setItem('accessToken', data.accessToken);
+            navigate('/mypage');
           } else {
-            setMessage(msg);
+            setMessage(data.message);
             // console.log('실패', success)
           }
-        } catch (error) {
-          setMessage('로그인에 실패했습니다.');
-          console.error(error)
-        }
+        // } catch (error) {
+        //   setMessage('로그인에 실패했습니다.');
+        //   console.error(error)
+        // }
 
-      }}>완료</Button>
+      }}>로그인</Button>
     </Form>
   )
 }
@@ -72,15 +70,28 @@ const Form = styled.form`
 
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   align-items: center;
+  gap: 30px;
 
-  p {
+  .warning {
     width: 100%;
-    height: 40px;
+    /* height: 13px; */
+    font-size: 13px;
     text-align: center;
     vertical-align: middle;
     color: red;
+  }
+
+  .notice {
+    width: 100%;
+    font-size: 13px;
+    text-align: left;
+  }
+
+  a {
+    text-decoration: none;
+    color: skyblue;
   }
 `
 const H3 = styled.h3`
@@ -88,12 +99,21 @@ const H3 = styled.h3`
 `
 
 const Button = styled.button`
-  padding: 10px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+
+  cursor: pointer;
+
+  &:hover {
+    background-color: lightgray;
+  }
 `
 
 const StInput = styled.input`
   width: 100%;
   height: 35px;
   padding: 5px;
-  ime-mode: ${(props) => { props.name === 'id' ? 'disabled' : 'auto' }}
+  border: 1px solid black;
+  border-radius: 3px;
 `

@@ -1,27 +1,50 @@
-import React from 'react'
-import { Link, Outlet } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link, Outlet, useNavigate } from 'react-router-dom'
 import styled from '@emotion/styled'
+import useBearsStore from '../zustand/bearStore'
+import { getUserProfile } from '../axios/auth'
 
 const HearderLayout = () => {
+  const { user, signIn, signOut } = useBearsStore(state => state);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const getTokenInfo = async (token) => {
+      const { data } = await getUserProfile(token);
+      console.log(data);
+      // if (data.userId) {
+        signIn({ ...data, accessToken: token, userId: data.id });
+      // } else {
+      //   signOut();
+      //   localStorage.removeItem('accessToken');
+      //   navigate('/');
+      // }
+
+    }
+
+
+    if (!user) {
+      const token = localStorage.getItem('accessToken');
+      // console.log('token :', token);
+      if (token) {
+        console.log('getting user info from token')
+        getTokenInfo(token);
+      }
+    }
+  }, [])
+  // signIn(userData);
+
+  console.log('userData', user)
+
   return (
     <>
       <Header>
-        <HomeButton/>
+        <HomeButton />
         <ButtonUl>
-          <li>
-            <Link to='/signin' style={{textDecoration:'none', color:'black'}}>로그인</Link>
-          </li>
-          <hr />
-          <li>
-            <Link to='/signup' style={{textDecoration:'none', color:'black'}}>회원가입</Link>
-          </li>
-          <hr />
-          <li>
-            <Link to='/mypage' style={{textDecoration:'none', color:'black'}}>마이페이지</Link>
-          </li>
+          <SignInOut user={user} signOut={signOut} />
         </ButtonUl>
       </Header>
-      <Outlet/>
+      <Outlet />
     </>
   )
 }
@@ -60,8 +83,36 @@ const ButtonUl = styled.ul`
 
 const HomeButton = () => {
   return (
-    <Link to='/' style={{textDecoration:'none', color:'black'}}>
+    <Link to='/' style={{ textDecoration: 'none', color: 'black' }}>
       Dev MBTI
     </Link>
   )
+}
+
+const SignInOut = ({ user, signOut }) => {
+  // console.log(user?.accessToken);
+  if (user) {
+    return (
+      <>
+        <li>
+          <Link to='/' style={{ textDecoration: 'none', color: 'black' }}
+            onClick={() => {
+              localStorage.removeItem('accessToken');
+              signOut();
+            }}>로그아웃</Link>
+        </li>
+        <hr />
+        <li>
+          <Link to='/mypage' style={{ textDecoration: 'none', color: 'black' }}>마이페이지</Link>
+        </li>
+      </>
+    )
+  } else {
+    return (
+      <>
+        <li>
+          <Link to='/signin' style={{ textDecoration: 'none', color: 'black' }}>로그인</Link>
+        </li>
+      </>)
+  }
 }

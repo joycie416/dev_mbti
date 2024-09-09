@@ -2,42 +2,105 @@ import axios from "axios";
 
 const API_URL = "https://moneyfulpublicpolicy.co.kr";
 
+const api = axios.create({baseURL:API_URL});
+
 export const register = async (userData) => {
   try {
     // id, password, nickname
-    const response = await axios.post(`${API_URL}/register`, userData);
-    return response.data; // message, success
+    const response = await api.post(`/register`, userData);
+    let res = {
+      rescode: response.status,
+      resdesc: response.statusText,
+      data: response.data,
+    };
+    // console.log(res);
+    return res; // message, success
   } catch (error) {
-    return error;
+    // if (axios.isAxiosError(error)) {
+    //   console.log("회원가입api : ", error);
+    // }
+    let res = {
+      rescode: error.response.status,
+      resdesc: error.response.statusText,
+      data: error.response.data,
+    };
+    console.log(res);
+    return res;
   }
 };
 
 export const login = async (userData) => {
   try {
     // id, password
-    const response = await axios.post(`${API_URL}/login`, userData);
-    console.log(response);
-    return response.data; // accessToken, userId, success, avatar, nickname
+    const response = await api.post(`/login`, userData);
+    let res = {
+      rescode: response.status,
+      resdesc: response.statusText,
+      data: response.data,
+    };
+    console.log(res);
+
+    return res; // accessToken, userId, success, avatar, nickname
   } catch (error) {
-    return error;
+    console.error(error);
+    let res = {
+      rescode: error.response.status,
+      resdesc: error.response.statusText,
+      data: error.response.data,
+    };
+    console.log(res);
+    return res;
   }
 };
 
 export const getUserProfile = async (token) => {
   try {
-    const response = await axios.get(`${API_URL}/user`, `Bearer ${token}`);
-    return response.data; // id, nickname, avatar, success
+    const response = await api.get(`/user`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    let res = {
+      rescode: response.status,
+      resdesc: response.statusText,
+      data: response.data,
+    };
+    // console.log(res);
+    return res; // id, nickname, avatar, success
   } catch (error) {
-    return error;
+    let res = {
+      rescode: error.response.status,
+      resdesc: error.response.statusText,
+      data: error.response.data,
+    };
+    console.log(res);
+    return res;
   }
 };
 
-export const updateProfile = async (formData) => {
+export const updateProfile = async (formData, token) => {
   try {
     // avatar, nickname
-    const response = await axios.patch(`${API_URL}/profile`, `Bearer ${token}`);
-    return response.data; // avatar, nickname, message, success
+    const response = await api.patch(`/profile`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    let res = {
+      rescode: response.status,
+      resdesc: response.statusText,
+      data: response.data,
+    };
+    // console.log(res);
+    return res; // avatar, nickname, message, success
   } catch (error) {
-    return error;
+    let res = {
+      rescode: error.response.status,
+      resdesc: error.response.statusText,
+      data: error.response.data,
+    };
+    console.log(res);
+    return res;
   }
 };

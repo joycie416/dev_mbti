@@ -5,7 +5,7 @@ import SignUpForm from '../components/SignUpForm'
 const SignUpPage = () => {
   return (
     <SignUpBody>
-      <SignUpForm/>
+      <SignUpForm />
     </SignUpBody>
   )
 }
@@ -14,7 +14,8 @@ export default SignUpPage
 
 const SignUpBody = styled.div`
   width: 350px;
-  height: 330px;
+  /* height: 330px; */
+  height: fit-content;
 
   padding: 20px;
 

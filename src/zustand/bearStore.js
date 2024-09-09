@@ -1,10 +1,10 @@
 // src > zustand > bearsStore.js
 import { create } from "zustand";
 
-const useBearsStore = create((set) => ({
+const useUserStore = create((set) => ({
   user: null,
   signIn: (profile) => set((state) => ({ user: profile })),
-  signOut: () => set({ bears: null }),
+  signOut: () => set({ user: null }),
 }));
 
-export default useBearsStore;
+export default useUserStore;
