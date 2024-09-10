@@ -12,13 +12,13 @@ const HearderLayout = () => {
     const getTokenInfo = async (token) => {
       const { data } = await getUserProfile(token);
       console.log(data);
-      // if (data.userId) {
+      if (data.userId) {
         signIn({ ...data, accessToken: token, userId: data.id });
-      // } else {
-      //   signOut();
-      //   localStorage.removeItem('accessToken');
-      //   navigate('/');
-      // }
+      } else {
+        signOut();
+        localStorage.removeItem('accessToken');
+        navigate('/');
+      }
 
     }
 
