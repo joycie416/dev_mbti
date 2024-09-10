@@ -3,22 +3,8 @@ import React, { useEffect } from 'react'
 import useUserStore from '../zustand/bearStore'
 import { deleteTestResult, updateTestResultVisibility } from '../axios/testResults';
 
-const ResultCard = ({result, setChange, setResults}) => {
-  const {user} = useUserStore(state => state);
-
-  const editVisibility = (e) => {
-    e.preventDefault();
-    console.log('change visibility :', result);
-    updateTestResultVisibility(result.id, result.visibility);
-    setChange(prev => !prev);
-  }
-
-  const deleteResult = (e) => {
-    e.preventDefault();
-    console.log('delete result :', result);
-    deleteTestResult(result.id);
-    setResults(prev => prev.filter(ele => ele.id !== result.id));
-  }  
+const ResultCard = ({ result, handleUpdate, handleDelete }) => {
+  const { user } = useUserStore(state => state);
 
   return (
     <Card>
@@ -30,7 +16,8 @@ const ResultCard = ({result, setChange, setResults}) => {
       <Bottom>
         {
           result.userId === user?.userId
-            ? <><ButtonVisible onClick={editVisibility}>{result.visibility ? '나만보기' : '공개하기'}</ButtonVisible> <ButtonDelete onClick={deleteResult}>{'삭제'}</ButtonDelete></>
+            ? <><ButtonVisible onClick={handleUpdate}>{result.visibility ? '나만보기' : '공개하기'}</ButtonVisible>
+                <ButtonDelete onClick={handleDelete}>{'삭제'}</ButtonDelete></>
             : null
         }
       </Bottom>

@@ -1,23 +1,25 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Link, Outlet, useNavigate } from 'react-router-dom'
 import styled from '@emotion/styled'
-import useBearsStore from '../zustand/bearStore'
+import useUserStore from '../zustand/bearStore'
 import { getUserProfile } from '../axios/auth'
 
 const HearderLayout = () => {
-  const { user, signIn, signOut } = useBearsStore(state => state);
+  const { user, signIn, signOut } = useUserStore(state => state);
   const navigate = useNavigate();
 
   useEffect(() => {
     const getTokenInfo = async (token) => {
       const { data } = await getUserProfile(token);
-      console.log(data);
-      if (data.userId) {
-        signIn({ ...data, accessToken: token, userId: data.id });
+      // console.log(data);
+      if (data.id) {
+        await signIn({ ...data, accessToken: token, userId: data.id });
       } else {
+        console.log('Expired token')
         signOut();
         localStorage.removeItem('accessToken');
-        navigate('/');
+        alert('토큰이 만료되었습니다. 다시 로그인해주세요.')
+        // navigate('/');
       }
 
     }
@@ -27,12 +29,11 @@ const HearderLayout = () => {
       const token = localStorage.getItem('accessToken');
       // console.log('token :', token);
       if (token) {
-        console.log('getting user info from token')
+        console.log('Getting user info from token')
         getTokenInfo(token);
       }
     }
   }, [])
-  // signIn(userData);
 
   console.log('userData', user)
 
