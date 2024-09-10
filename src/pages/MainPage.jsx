@@ -6,13 +6,11 @@ import { useNavigate } from 'react-router-dom'
 const MainPage = () => {
   const navigate = useNavigate();
   return (
-    <MainBody>
-      <button onClick={(e) => {
-        e.preventDefault();
-        navigate('/results')
-      }}>결과목록으로</button>
+    // <MainBody>
+    <div className="main_body max-w-screen-lg w-full flex flex-col p-5 bg-gray-100" style={{height:'calc(100% - 68px)'}}>
       <MainContent/>
-    </MainBody>
+    </div>
+    // </MainBody>
   )
 }
 

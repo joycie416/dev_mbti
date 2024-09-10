@@ -7,21 +7,26 @@ const ResultCard = ({ result, handleUpdate, handleDelete }) => {
   const { user } = useUserStore(state => state);
 
   return (
-    <Card>
-      <Top>
-        <p>{result.nickname}</p>
+    <div className='result_card w-full flex flex-col mb-10 p-5 bg-white rounded-xl shadow-md'>
+      <div className='result_card_top w-full flex justify-between items-center'>
+        <p className='font-bold text-lg'>{result.nickname}</p>
         <p>{result.date.slice(0, 10)}</p>
-      </Top>
-      <p>{result.result}</p>
-      <Bottom>
+      </div>
+      <hr className='h-0.5 w-full my-2 bg-gray-100 border-0'/>
+      <p className='mb-2 font-bold text-md'>{result.result}</p>
+      <p className='leading-5'>{result.description}</p>
+      <hr className='h-0.5 w-full my-3 bg-gray-100 border-0'/>
+      <div className='result_card_bottom w-full h-8 flex justify-end'>
         {
           result.userId === user?.userId
-            ? <><ButtonVisible onClick={handleUpdate}>{result.visibility ? '나만보기' : '공개하기'}</ButtonVisible>
-                <ButtonDelete onClick={handleDelete}>{'삭제'}</ButtonDelete></>
+            ? <><button className='px-3 py-2 mr-2 text-white bg-blue-500 rounded-lg'
+            onClick={handleUpdate}>{result.visibility ? '나만보기' : '공개하기'}</button>
+                <button className='px-3 py-2 text-white bg-red-500 rounded-lg'
+                 onClick={handleDelete}>{'삭제'}</button></>
             : null
         }
-      </Bottom>
-    </Card>
+      </div>
+    </div>
   )
 }
 

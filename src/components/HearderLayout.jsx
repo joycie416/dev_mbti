@@ -40,7 +40,13 @@ const HearderLayout = () => {
   return (
     <>
       <Header>
-        <HomeButton />
+        <button className='p-4'
+          onClick={(e) => {
+            e.preventDefault();
+            navigate('/');
+          }}>
+          Dev MBTI
+        </button>
         <ButtonUl>
           <SignInOut user={user} signOut={signOut} />
         </ButtonUl>
@@ -62,6 +68,8 @@ const Header = styled.header`
 
   padding: 10px;
 
+  background-color: white;
+
   position: sticky;
   top:0;
   z-index: 3;
@@ -82,29 +90,47 @@ const ButtonUl = styled.ul`
   }
 `
 
-const HomeButton = () => {
-  return (
-    <Link to='/' style={{ textDecoration: 'none', color: 'black' }}>
-      Dev MBTI
-    </Link>
-  )
-}
-
 const SignInOut = ({ user, signOut }) => {
   // console.log(user?.accessToken);
+  const navigate = useNavigate();
+
+  const handleToResult = (e) => {
+    e.preventDefault();
+    if (user) {
+      navigate('/results');
+      return;
+    } else {
+      const result = confirm('로그인이 필요한 서비스입니다.\n로그인하시겠습니까?');
+      if (result) {
+        navigate('/signin');
+        return;
+      }
+    }
+  }
+
   if (user) {
     return (
       <>
         <li>
-          <Link to='/' style={{ textDecoration: 'none', color: 'black' }}
-            onClick={() => {
-              localStorage.removeItem('accessToken');
-              signOut();
-            }}>로그아웃</Link>
+          <button className='p-4'
+            onClick={handleToResult}>결과 보기</button>
         </li>
         <hr />
         <li>
-          <Link to='/mypage' style={{ textDecoration: 'none', color: 'black' }}>마이페이지</Link>
+          <button className='p-4'
+            onClick={() => {
+              localStorage.removeItem('accessToken');
+              signOut();
+              navigate('/');
+            }}>로그아웃</button>
+        </li>
+        <hr />
+        <li>
+          <button className='p-4'
+            onClick={(e) => {
+              e.preventDefault();
+              navigate('/mypage');
+            }}>마이페이지</button>
         </li>
       </>
     )
@@ -112,7 +138,11 @@ const SignInOut = ({ user, signOut }) => {
     return (
       <>
         <li>
-          <Link to='/signin' style={{ textDecoration: 'none', color: 'black' }}>로그인</Link>
+          <button className='p-4'
+            onClick={(e) => {
+              e.preventDefault();
+              navigate('/signin');
+            }}>로그인</button>
         </li>
       </>)
   }

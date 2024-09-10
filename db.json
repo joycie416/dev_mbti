@@ -5,6 +5,7 @@
       "userId": "testhihi",
       "nickname": "test",
       "result": "ESTJ",
+      "description": "사물이나 사람을 관리하는 데 타의 추종을 불허하는 뛰어난 실력을 갖춘 관리자. 주변 사람들한테 일해라 운동해라 공부해라 뼈 때림.",
       "answers": [
         "예",
         "예",
@@ -35,6 +36,7 @@
       "userId": "test00123",
       "nickname": "test0123",
       "result": "INFP",
+      "description": "진정한 이상주의자. 버그가 난무하는 최악의 상황도 긍정적으로 만들려고 노력함. 감정 기복이 심하고 개복치와 같은 멘탈의 소유자.",
       "answers": [
         "아니오",
         "예",
@@ -65,6 +67,7 @@
       "userId": "test00123",
       "nickname": "test0123",
       "result": "ISTJ",
+      "description": "필요한 일만 정확하게 처리함. 물건 사면 설명서 꼭 읽어봄. 남들과 같이 일하는 것 보다 혼자 일하는 것이 효율적.",
       "answers": [
         "아니오",
         "아니오",
@@ -95,6 +98,7 @@
       "userId": "test123_hi",
       "nickname": "test123_hi",
       "result": "INFP",
+      "description": "진정한 이상주의자. 버그가 난무하는 최악의 상황도 긍정적으로 만들려고 노력함. 감정 기복이 심하고 개복치와 같은 멘탈의 소유자.",
       "answers": [
         "아니오",
         "아니오",
@@ -125,6 +129,7 @@
       "userId": "test00123",
       "nickname": "test0123",
       "result": "ENFP",
+      "description": "자유로운 사고의 소유자이며, 분위기 메이커. 창의력에 발동이 걸리면 주목받는 주인공이 되어 리더 혹은 전문가로 추앙 받음.",
       "answers": [
         "예",
         "아니오",
@@ -155,6 +160,7 @@
       "userId": "testhihi",
       "nickname": "test",
       "result": "INFP",
+      "description": "진정한 이상주의자. 버그가 난무하는 최악의 상황도 긍정적으로 만들려고 노력함. 감정 기복이 심하고 개복치와 같은 멘탈의 소유자.",
       "answers": [
         "예",
         "아니오",

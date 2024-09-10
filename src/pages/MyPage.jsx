@@ -10,7 +10,7 @@ import { getUserProfile } from '../axios/auth';
 const MyPage = () => {
   const { user, signIn, signOut } = useUserStore(state => state);
   if (!user) {
-    return <Navigate to='/'/>
+    return <Navigate to='/' />
   }
   // const token = localStorage.getItem('accessToken');
   // const getTokenInfo = async (token) => {
@@ -90,12 +90,16 @@ const MyPage = () => {
   };
 
   return (
-    <div>
-      <h3>MyPage</h3>
-      <ProfileUpdate />
-      {results?.map(result => (
-        <ResultCard result={result} handleUpdate={handleUpdate(result)} handleDelete={handleDelete(result)} key={result.id} />
-      ))}
+    <div className="w-full flex flex-col items-center bg-gray-100 p-8" style={{ minHeight: 'calc(100%-68px)' }}>
+      <div className=" max-w-2xl w-full">
+        <h1 className="text-3xl font-bold text-primary-color mb-6 text-center">
+          마이페이지
+        </h1>
+        <ProfileUpdate />
+        {results?.map(result => (
+          <ResultCard result={result} handleUpdate={handleUpdate(result)} handleDelete={handleDelete(result)} key={result.id} />
+        ))}
+      </div>
     </div>
   )
 }
