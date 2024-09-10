@@ -1,8 +1,14 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import SignUpForm from '../components/SignUpForm'
+import useUserStore from '../zustand/bearStore';
 
 const SignUpPage = () => {
+  const { user } = useUserStore(state => state);
+  if (user) {
+    return <Navigate to='/'/>
+  }
+  
   return (
     <SignUpBody>
       <SignUpForm />

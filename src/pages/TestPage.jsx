@@ -3,13 +3,16 @@ import TestForm from '../components/TestForm'
 import styled from '@emotion/styled'
 import useUserStore from '../zustand/bearStore'
 import { Navigate, useNavigate } from 'react-router-dom'
-import {calculateMBTI} from '../utils/mbtiCalculator'
+import { calculateMBTI } from '../utils/mbtiCalculator'
 import { createTestResult } from '../axios/testResults'
 
 const TestPage = () => {
-  const {user} = useUserStore(state => state);
+  const { user } = useUserStore(state => state);
+
+  
+
   if (!user) {
-    return <Navigate to='/'/>
+    return <Navigate to='/' />
   }
   const navigate = useNavigate();
 
@@ -18,7 +21,8 @@ const TestPage = () => {
     const resultData = {
       userId: user.userId,
       nickname: user.nickname,
-      result,
+      result: result[0],
+      description: result[1],
       answers,
       date: new Date().toISOString(),
       visibility: true,
@@ -37,7 +41,7 @@ const TestPage = () => {
   return (
     <TestBody>
       <p>TestPage</p>
-      <TestForm/>
+      <TestForm />
     </TestBody>
   )
 }

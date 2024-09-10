@@ -53,8 +53,11 @@ export const login = async (userData) => {
   }
 };
 
-export const getUserProfile = async (token) => {
+export const getUserProfile = async () => {
   try {
+    const token = localStorage.getItem('accessToken');
+    
+    if (token){
     const response = await api.get(`/user`, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -67,6 +70,9 @@ export const getUserProfile = async (token) => {
     };
     // console.log(res);
     return res; // id, nickname, avatar, success
+    } else {
+      return null;
+    }
   } catch (error) {
     let res = {
       rescode: error.response.status,
@@ -104,3 +110,17 @@ export const updateProfile = async (formData, token) => {
     return res;
   }
 };
+
+// api.interceptors.request.use((config) => {
+//   config.headers['Authorization'] = `Bearer ${localStorage.getItem('accessToken')}`;
+//   return config;
+// })
+
+// api.interceptors.response.use((response) => {
+//   if (response.headers["Authorization"]) {
+//     localStorage.setItem('accessToken', response.headers["Authorization"])
+//   } else if (response.data.error === "INVALID_TOKEN") {
+//     localStorage.removeItem('accessToken');
+//     alert('토큰이 만료되었습니다. 다시 로그인해주세요.')
+//   }
+// })

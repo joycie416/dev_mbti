@@ -9,7 +9,7 @@ const ProfileUpdate = () => {
 
 
   return (
-    <UpdateForm>
+    <form className='update_form w-80 h-40 flex flex-col justify-between items-center p-5 mb-10 mx-auto bg-white rounded-xl shadow-md'>
       <label>닉네임 변경</label>
       <Input defaultValue={nickname.current} placeholder='nickname' 
       onChange={(e) => {
@@ -21,7 +21,7 @@ const ProfileUpdate = () => {
         alert('닉네임이 변경되었습니다.');
         signIn({...user, nickname:nickname.current});
       }}>변경</Button>
-    </UpdateForm>
+    </form>
   )
 }
 
@@ -48,6 +48,8 @@ const Input = styled.input`
 const Button = styled.button`
   padding: 5px 10px;
   background-color: #e8e8e8;
+
+  border-radius: 5px;
 
   &:hover {
 
