@@ -8,6 +8,9 @@ import { createTestResult } from '../axios/testResults'
 
 const TestPage = () => {
   const { user } = useUserStore(state => state);
+
+  
+
   if (!user) {
     return <Navigate to='/' />
   }

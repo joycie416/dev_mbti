@@ -19,9 +19,9 @@ const ResultCard = ({ result, handleUpdate, handleDelete }) => {
       <div className='result_card_bottom w-full h-8 flex justify-end'>
         {
           result.userId === user?.userId
-            ? <><button className='px-3 py-2 mr-2 text-white bg-blue-500 rounded-lg'
+            ? <><button className='px-3 py-2 mr-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600'
             onClick={handleUpdate}>{result.visibility ? '나만보기' : '공개하기'}</button>
-                <button className='px-3 py-2 text-white bg-red-500 rounded-lg'
+                <button className='px-3 py-2 text-white bg-red-500 rounded-lg hover:bg-red-600'
                  onClick={handleDelete}>{'삭제'}</button></>
             : null
         }

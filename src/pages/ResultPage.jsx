@@ -70,7 +70,7 @@ const ResultPage = () => {
   };
 
   return (
-    <div className="w-full flex flex-col items-center justify-center bg-gray-100 p-8"  style={{ minHeight: 'calc(100%-68px)' }}>
+    <div className="w-full flex flex-col items-center justify-center bg-gray-100 p-8"  style={{ minHeight: 'calc(100% - 68px)' }}>
       <div className="max-w-2xl w-full">
         <h1 className="text-3xl font-bold text-primary-color mb-6 text-center">
           모든 테스트 결과

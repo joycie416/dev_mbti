@@ -8,17 +8,24 @@ import TestPage from './pages/TestPage'
 import ResultPage from './pages/ResultPage'
 import MyPage from './pages/MyPage'
 import HearderLayout from './components/HearderLayout'
-import useBearsStore from './zustand/bearStore'
+import useUserStore from './zustand/bearStore'
 import { getUserProfile } from './axios/auth'
 
-const ProtectedRoute = ({element:Element}) => {
-  const { user } = useBearsStore(state => state);
-  console.log('protected router :', user);
-
-  return user ? <Element /> : <Navigate to='/signin'/>;
-}
-
 function App() {
+  // const { user, signIn, signOut } = useUserStore(state => state);
+
+  // useEffect(() => {
+  //   const response = getUserProfile();
+  //   if (response.id) {
+  //     signIn({ ...data, accessToken: token, userId: data.id });
+  //   } else {
+  //     console.log('Expired token')
+  //     signOut();
+  //     localStorage.removeItem('accessToken');
+  //     alert('토큰이 만료되었습니다. 다시 로그인해주세요.')
+  //     return <Navigate to='/'/>
+  //   }
+  // })
 
   return (
     <BrowserRouter>
