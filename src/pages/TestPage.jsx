@@ -8,12 +8,11 @@ import { createTestResult } from '../axios/testResults'
 
 const TestPage = () => {
   const { user } = useUserStore(state => state);
-
-  
-
-  if (!user) {
+  const token = localStorage.getItem('accessToken');
+  if (!token) {
     return <Navigate to='/' />
   }
+  
   const navigate = useNavigate();
 
   const handleTestSubmit = async (answers) => {
@@ -32,27 +31,11 @@ const TestPage = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10">
+    <div className="test_body max-w-md mx-auto pb-10">
       <h1 className="text-2xl font-bold mb-4">MBTI 테스트</h1>
       <TestForm onSubmit={handleTestSubmit} />
     </div>
   );
-
-  return (
-    <TestBody>
-      <p>TestPage</p>
-      <TestForm />
-    </TestBody>
-  )
 }
 
 export default TestPage
-
-const TestBody = styled.div`
-  width: 100%;
-  
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`
