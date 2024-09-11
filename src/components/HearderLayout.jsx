@@ -31,7 +31,7 @@ const HearderLayout = () => {
         getTokenInfo(token);
       }
     }
-  }, [])
+  }, [user])
 
   // console.log('userData', user?.userId)
 

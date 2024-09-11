@@ -24,7 +24,7 @@ const ResultPage = () => {
   })
 
   const editVisibility = async (result) => {
-    console.log('change visibility :', result);
+    // console.log('change visibility :', result);
     await updateTestResultVisibility(result.id, result.visibility);
   }
 
