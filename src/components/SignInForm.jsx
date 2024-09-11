@@ -45,7 +45,7 @@ const SignInForm = () => {
           // setMessage(msg);
           if (data.success) {
             // alert(`로그인에 성공했습니다.`);
-            await signIn(data);
+            signIn(data);
             localStorage.setItem('accessToken', data.accessToken);
             navigate('/mypage');
           } else {
