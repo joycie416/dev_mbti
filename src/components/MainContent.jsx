@@ -37,7 +37,6 @@ const MainContent = () => {
   }
 
   return (
-    // <Content>
     <div className="main_content w-full flex flex-col items-center gap-y-5">
       <h3>
         Dev MBTI
@@ -48,21 +47,10 @@ const MainContent = () => {
       <button className='bg-blue-500 p-4 rounded-lg text-white'
         onClick={handleTest}>내 성격 알아보러 가기</button>
     </div>
-    // </Content>
   )
 }
 
 export default MainContent
-
-const Content = styled.div`
-  width: 100%;
-
-  display: flex;
-  flex-direction: column;
-  /* justify-content: center; */
-  align-items: center;
-  gap: 50px;
-`
 
 const IntroDiv = styled.div`
   width: 100%;
@@ -73,25 +61,10 @@ const IntroDiv = styled.div`
 `
 
 const IntroCard = ({ title, content }) => {
-  const Card = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap:10px;
-  `
-
-  const CardTitle = styled.p`
-    font-size: 18px;
-    font-weight: 600;
-  `
-  const CardContent = styled.p`
-    text-align: justify;
-  `
   return (
-    // <Card key={title}>
-    <div className='bg-white flex flex-col items-center gap-y-5 p-3 rounded-lg' key={title}>
-      <p className='font-bold text-lg'>{title}</p>
-      <p className='leading-5'>{content}</p>
+    <div className='card bg-white flex flex-col items-center gap-y-5 p-3 rounded-lg' key={title}>
+      <p className='card_ttle font-bold text-lg'>{title}</p>
+      <p className='card_content leading-5'>{content}</p>
     </div>
-    // </Card>
   )
 }
